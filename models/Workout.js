@@ -1,5 +1,6 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
+const Schema = mongoose.Schema;
 // a workout consists of a day and the exercises done
 // Each exercise consists of a type, name, duration, weight, reps, sets, distance
 const workoutSchema = new Schema({
@@ -37,6 +38,6 @@ const workoutSchema = new Schema({
     },
 });
 
-const Workout = model('Workout', workoutSchema);
+const Workout = mongoose.model('Workout', workoutSchema);
 
 module.exports = Workout;
