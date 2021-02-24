@@ -27,7 +27,7 @@ router.put('/api/workouts/:id', ({ body, params }, res) => {
 
 // post route to create a new workout, createWorkout()
 router.post('/api/workouts', ({ body }, res) => {
-    Workout.create({ body }, {new: true})
+    Workout.create({ body }, { new: true })
         .then(workout => {
             res.json(workout);
         })
@@ -38,9 +38,12 @@ router.post('/api/workouts', ({ body }, res) => {
 
 // get the workouts in range, getWorkoutsInRange()
 router.get('/api/workouts/range', (req, res) => {
-    Workout.aggregate([{$addFields: {totalDuration : {$sum: '$exercises.duration'}}}])
+    Workout.aggregate([{ $addFields: { totalDuration: { $sum: '$exercises.duration' } } }])
         .then(workout => {
             res.json(workout);
+        })
+        .catch(err => {
+            res.status(400).json(err);
         })
 });
 
