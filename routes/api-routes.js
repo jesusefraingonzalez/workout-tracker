@@ -3,9 +3,9 @@ const Workout = require('../models/Workout');
 
 // get route to get the last workout, getLastWorkout
 router.get('/api/workouts', (req, res) => {
-    Workout.find({})
+    Workout.aggregate([{ $addFields: { totalDuration: { $sum: '$exercises.duration' } } }])
         .then(workout => {
-            return res.json(workout);
+            res.json(workout);
         })
         .catch(err => {
             res.status(400).json(err);
