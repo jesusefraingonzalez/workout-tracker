@@ -27,7 +27,7 @@ router.put('/api/workouts/:id', ({ body, params }, res) => {
 
 // post route to create a new workout, createWorkout()
 router.post('/api/workouts', ({ body }, res) => {
-    Workout.create({ body }, { new: true })
+    Workout.create({})
         .then(workout => {
             res.json(workout);
         })
